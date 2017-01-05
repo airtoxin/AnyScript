@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "AnyScript",
+  "version": "0.0.1",
+  "description": "Run script on any page",
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content.js"]
+    }
+  ]
+}
