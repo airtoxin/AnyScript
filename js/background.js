@@ -1,1 +1,5 @@
-console.log("@11111111", 11111111)
+chrome.browserAction.onClicked.addListener(function(tab) {
+  chrome.tabs.create({
+    url: "popup.html"
+  });
+});

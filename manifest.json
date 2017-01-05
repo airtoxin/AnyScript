@@ -3,9 +3,14 @@
   "name": "AnyScript",
   "version": "0.0.1",
   "description": "Run script on any page",
+  "permissions": [
+    "activeTab"
+  ],
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": ["js/background.js"],
+    "persistent": true
   },
+  "browser_action": {},
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
