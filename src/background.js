@@ -3,3 +3,11 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     url: "popup.html"
   });
 });
+
+let i = 0;
+setInterval(() => {
+  i++;
+  chrome.storage.sync.set({
+    scripts: `i=${i}`,
+  });
+}, 1000);

@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "description": "Run script on any page",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "background": {
     "scripts": ["background.js"],
