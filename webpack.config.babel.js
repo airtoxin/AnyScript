@@ -28,6 +28,9 @@ export default {
       { from: './src/manifest.json' },
       { from: './src/popup.html' },
     ]),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    })
   ],
   devTool: '#inline-source-map',
   devServer: {
