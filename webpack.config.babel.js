@@ -6,6 +6,7 @@ export default {
   entry: {
     background: './src/background.js',
     content: './src/content.js',
+    app: './src/view/index.jsx',
   },
   output: {
     publicPath: '/',
@@ -19,7 +20,7 @@ export default {
   },
   module: {
     loaders: [
-      { test: /\.js$/, include: [path.resolve(__dirname, 'src')], loader: 'babel-loader' },
+      { test: /\.jsx?$/, include: [path.resolve(__dirname, 'src')], loader: 'babel-loader' },
     ],
   },
   plugins: [
@@ -28,7 +29,7 @@ export default {
       { from: './src/popup.html' },
     ]),
   ],
-  devTool: 'inline-source-map',
+  devTool: '#inline-source-map',
   devServer: {
     contentBase: 'dest',
     port: 9000,
