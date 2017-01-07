@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleActivation, activate, deactivate } from './actions';
+import { toggleActivation, activate, deactivate } from '../../actions';
 
 const App = ({ active, onClickToggle, onClickActivate, onClickDeactivate }) => (
   <div>

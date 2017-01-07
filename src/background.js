@@ -1,3 +1,9 @@
+chrome.storage.sync.get('scripts', ({ scripts }) => {
+  if (!scripts) chrome.storage.sync.set({
+    scripts: [],
+  });
+});
+
 chrome.browserAction.onClicked.addListener(function(tab) {
   chrome.tabs.create({
     url: "popup.html"

@@ -16,7 +16,7 @@ export default {
   },
   target: 'web',
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
   },
   module: {
     loaders: [
