@@ -27,10 +27,12 @@
     "babel-plugin-transform-object-rest-spread": "^6.20.2",
     "babel-preset-react": "^6.16.0",
     "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "redux-devtools-extension": "^1.0.0",
     "redux-logger": "^2.7.4",
+    "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },

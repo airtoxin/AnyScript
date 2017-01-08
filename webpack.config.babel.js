@@ -2,6 +2,10 @@ import path from 'path';
 import webpack from 'webpack';
 import Copy from 'copy-webpack-plugin';
 
+const cssOptions = env === 'production'
+  ? ''
+  : '&localIdentName=[path][name]---[local]---[hash:base64:5]';
+
 export default {
   entry: {
     background: './src/background.js',
@@ -21,6 +25,7 @@ export default {
   module: {
     loaders: [
       { test: /\.jsx?$/, include: [path.resolve(__dirname, 'src')], loader: 'babel-loader' },
+      { test: /\.css$/, include: [path.resolve(__dirname, 'src')], loaders: ['style', `css?modules${cssOptions}`] },
     ],
   },
   plugins: [
