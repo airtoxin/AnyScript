@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleActivation, activate, deactivate } from '../../actions';
+import { toggleActivation, activate, deactivate, addScript } from '../../actions';
 import Activation from '../Activation';
-import Script from '../Script';
+import ScriptForm from '../ScriptForm';
 
-const App = ({ active, scrips, onClickToggle, onClickActivate, onClickDeactivate }) => (
+const App = ({ active, scrips, onClickToggle, onClickActivate, onClickDeactivate, onClickAddScript }) => (
   <div>
     <Activation
       active={active}
@@ -12,20 +12,18 @@ const App = ({ active, scrips, onClickToggle, onClickActivate, onClickDeactivate
       onClickActivate={onClickActivate}
       onClickDeactivate={onClickDeactivate}
     />
-    {scrips.map((script, i) => (
-      <Script key={i} />
-    ))}
+    <ScriptForm />
   </div>
 );
 
 export default connect(
   state => ({
     active: state.app.active,
-    scrips: state.script.scripts,
   }),
   dispatch => ({
     onClickToggle: () => dispatch(toggleActivation()),
     onClickActivate: () => dispatch(activate()),
     onClickDeactivate: () => dispatch(deactivate()),
+    onClickAddScript: () => dispatch(addScript())
   }),
 )(App);

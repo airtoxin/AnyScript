@@ -35,6 +35,8 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "brace": "^0.9.1",
+    "react-ace": "^4.1.1",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-actions": "^1.2.0"
