@@ -22,6 +22,7 @@ export default class ScriptForm extends Component {
       <AceEditor
         mode="javascript"
         theme="github"
+        width="100%"
         onChange={this.handleChange}
         name={this.props.id}
         value={this.state.script}

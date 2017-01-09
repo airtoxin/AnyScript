@@ -2,7 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import Copy from 'copy-webpack-plugin';
 
-const cssOptions = env === 'production'
+const cssOptions = process.env.NODE_ENV === 'production'
   ? ''
   : '&localIdentName=[path][name]---[local]---[hash:base64:5]';
 
