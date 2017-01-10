@@ -37,7 +37,10 @@ const script = (
 ) => {
   switch (type) {
     case ADD_SCRIPT:
-      return { ...state, script: state.script.concat([payload])  };
+      return {
+        ...state,
+        scripts: state.scripts.concat([ payload ]),
+      };
     default:
       return state;
   }

@@ -1,20 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import brace from 'brace';
 import AceEditor from 'react-ace';
+import styles from './index.css';
 
 import 'brace/mode/javascript';
 import 'brace/theme/github';
 
 export default class ScriptForm extends Component {
-  constructor() {
+  constructor({ code }) {
     super();
-    this.state = { script: '' };
+    this.state = { code: code };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(value) {
-    this.setState({ script: value });
+    this.setState({ code: value });
   }
 
   render() {
@@ -22,10 +23,13 @@ export default class ScriptForm extends Component {
       <AceEditor
         mode="javascript"
         theme="github"
+        className={styles.box}
+        fontSize={24}
         width="100%"
+        showPrintMargin={false}
         onChange={this.handleChange}
         name={this.props.id}
-        value={this.state.script}
+        value={this.state.code}
       />
     );
   }
@@ -33,4 +37,5 @@ export default class ScriptForm extends Component {
 
 ScriptForm.propTypes = {
   id: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired,
 };
