@@ -15,9 +15,12 @@ export const {
 );
 
 export const ADD_SCRIPT = 'ADD_SCRIPT';
+export const SAVE_SCRIPT = 'SAVE_SCRIPT';
 
 export const {
-  addScript
+  addScript,
+  saveScript
 } = createActions(
-  ADD_SCRIPT
+  ADD_SCRIPT,
+  SAVE_SCRIPT
 );

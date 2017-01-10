@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
+import { findIndex } from 'lodash';
 import {
   DEACTIVATE,
   ACTIVATE,
   TOGGLE_ACTIVATION,
   ADD_SCRIPT,
+  SAVE_SCRIPT,
 } from './actions';
 
 const initial = {
@@ -16,33 +18,39 @@ const initial = {
 };
 
 const app = (
-  state = initial.app,
+  appState = initial.app,
   { type },
 ) => {
   switch (type) {
     case DEACTIVATE:
-      return { ...state, active: false };
+      return { ...appState, active: false };
     case ACTIVATE:
-      return { ...state, active: true };
+      return { ...appState, active: true };
     case TOGGLE_ACTIVATION:
-      return { ...state, active: !state.active }
+      return { ...appState, active: !appState.active }
     default:
-      return state;
+      return appState;
   }
 };
 
 const script = (
-  state = initial.script,
+  scriptState = initial.script,
   { type, payload },
 ) => {
   switch (type) {
     case ADD_SCRIPT:
       return {
-        ...state,
-        scripts: state.scripts.concat([ payload ]),
+        ...scriptState,
+        scripts: scriptState.scripts.concat([ payload ]),
+      };
+    case SAVE_SCRIPT:
+      const idx = findIndex(scriptState.scripts, s => s.id === payload.id);
+      return {
+        ...scriptState,
+        scripts: scriptState.scripts.splice(0, idx).concat([payload], scriptState.scripts.splice(idx + 1)),
       };
     default:
-      return state;
+      return scriptState;
   }
 };
 
