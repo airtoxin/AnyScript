@@ -3,6 +3,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import middlewares from './middlewares';
 import reducer from './reducers';
 
+const syncState = (store) => {
+  const state = store.getState();
+  chrome.storage.sync.set({
+    state: state,
+  });
+}
+
 export default initialState => {
   const store = createStore(
     reducer,
@@ -10,12 +17,8 @@ export default initialState => {
     composeWithDevTools(applyMiddleware(...middlewares)),
   );
 
-  store.subscribe(() => {
-    const state = store.getState();
-    chrome.storage.sync.set({
-      state: state,
-    });
-  });
+  store.subscribe(() => syncState(store));
+  syncState(store);
 
   return store;
 };
