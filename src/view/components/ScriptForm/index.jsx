@@ -29,7 +29,7 @@ export default class ScriptForm extends Component {
           fontSize={16}
           width="90%"
           showPrintMargin={false}
-          onChange={debounce(this.handleChange, 2000)}
+          onChange={debounce(this.handleChange, 1000)}
           name={this.props.id}
           value={this.props.code}
         />
