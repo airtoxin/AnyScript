@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Button } from 're-bulma';
 import brace from 'brace';
 import AceEditor from 'react-ace';
 import { debounce } from 'lodash';
@@ -25,13 +26,14 @@ export default class ScriptForm extends Component {
           mode="javascript"
           theme="github"
           className={styles.box}
-          fontSize={24}
+          fontSize={16}
           width="90%"
           showPrintMargin={false}
           onChange={debounce(this.handleChange, 2000)}
           name={this.props.id}
           value={this.props.code}
         />
+        <Button color="isDanger" onClick={() => this.props.onDelete(this.props.id)}>Delete</Button>
       </div>
     );
   }
@@ -41,4 +43,5 @@ ScriptForm.propTypes = {
   id: PropTypes.string.isRequired,
   code: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };

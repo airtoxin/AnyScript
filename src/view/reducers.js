@@ -5,6 +5,7 @@ import {
   ACTIVATE,
   TOGGLE_ACTIVATION,
   ADD_SCRIPT,
+  DELETE_SCRIPT,
   SAVE_SCRIPT,
 } from './actions';
 
@@ -38,19 +39,29 @@ const script = (
   { type, payload },
 ) => {
   switch (type) {
-    case ADD_SCRIPT:
+    case ADD_SCRIPT: {
       return {
         ...scriptState,
         scripts: scriptState.scripts.concat([ payload ]),
       };
-    case SAVE_SCRIPT:
+    }
+    case DELETE_SCRIPT: {
+      const idx = findIndex(scriptState.scripts, s => s.id === payload.id);
+      return {
+        ...scriptState,
+        scripts: scriptState.scripts.splice(0, idx).concat(scriptState.scripts.splice(idx + 1)),
+      };
+    }
+    case SAVE_SCRIPT: {
       const idx = findIndex(scriptState.scripts, s => s.id === payload.id);
       return {
         ...scriptState,
         scripts: scriptState.scripts.splice(0, idx).concat([payload], scriptState.scripts.splice(idx + 1)),
       };
-    default:
+    }
+    default: {
       return scriptState;
+    }
   }
 };
 

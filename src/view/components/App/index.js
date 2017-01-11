@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
+import util from 'util';
 import { Button } from 're-bulma';
-import { toggleActivation, activate, deactivate, addScript, saveScript } from '../../actions';
+import { toggleActivation, activate, deactivate, addScript, deleteScript, saveScript } from '../../actions';
 import ScriptTab from '../ScriptTab';
 import Activation from '../Activation';
 import ScriptForm from '../ScriptForm';
+import Debug from '../Debug';
 import styles from './index.css';
 
 const createNewScript = () => ({
@@ -13,9 +15,9 @@ const createNewScript = () => ({
   code: '',
 });
 
-const App = ({ scripts, onClickAddScript, onChangeScriptCode }) => (
+const App = ({ scripts, onClickAddScript, onClickDeleteScript, onChangeScriptCode }) => (
   <div>
-    {JSON.stringify(scripts)}
+    <Debug />
     {scripts.map(script => (
       <ScriptForm
         key={script.id}
@@ -25,9 +27,14 @@ const App = ({ scripts, onClickAddScript, onChangeScriptCode }) => (
           id: script.id,
           code,
         })}
+        onDelete={onClickDeleteScript}
       />
     ))}
-    <Button className={styles.button} color="isPrimary" onClick={onClickAddScript}>Add script</Button>
+    <Button
+      className={styles.button}
+      color="isPrimary"
+      onClick={onClickAddScript}
+    >Add script</Button>
   </div>
 );
 
@@ -38,6 +45,7 @@ export default connect(
   }),
   dispatch => ({
     onClickAddScript: () => dispatch(addScript(createNewScript())),
+    onClickDeleteScript: (id) => dispatch(deleteScript({ id })),
     onChangeScriptCode: (script) => dispatch(saveScript(script))
   }),
 )(App);
