@@ -31,7 +31,6 @@ const App = ({ dispatch, active, scripts }) => (
       ) : (
         <UrlForm
           key={id}
-          id={id}
           url={url}
           onChange={url => dispatch(changeScriptUrl, id, url)}
           onDelete={() => dispatch(deleteScript, id)}

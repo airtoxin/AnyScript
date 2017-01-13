@@ -8,36 +8,22 @@ import styles from './index.css';
 import 'brace/mode/javascript';
 import 'brace/theme/github';
 
-export default class ScriptForm extends Component {
-  constructor() {
-    super();
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(value) {
-    this.props.onChange(value);
-  }
-
-  render() {
-    return (
-      <div className={`${styles.flex} ${styles.container}`}>
-        <AceEditor
-          mode="javascript"
-          theme="github"
-          className={styles.box}
-          fontSize={16}
-          width="90%"
-          showPrintMargin={false}
-          onChange={debounce(this.handleChange, 1000)}
-          name={this.props.id}
-          value={this.props.code}
-        />
-        <Button color="isDanger" onClick={() => this.props.onDelete(this.props.id)}>Delete</Button>
-      </div>
-    );
-  }
-}
+const ScriptForm = ({ id, code, onChange, onDelete }) => (
+  <div className={`${styles.flex} ${styles.container}`}>
+    <AceEditor
+      mode="javascript"
+      theme="github"
+      className={styles.box}
+      fontSize={16}
+      width="90%"
+      showPrintMargin={false}
+      onChange={onChange}
+      name={id}
+      value={code}
+    />
+    <Button color="isDanger" onClick={() => onDelete()}>Delete</Button>
+  </div>
+);
 
 ScriptForm.propTypes = {
   id: PropTypes.string.isRequired,
@@ -45,3 +31,5 @@ ScriptForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
+
+export default ScriptForm;
