@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore from './store';
+import { root } from 'baobab-react/higher-order';
+import tree from './tree';
 import App from './components/App';
 
+const Rooted = root(tree, App);
+
+ReactDom.render(<Rooted />, document.getElementById('app'));
+
 chrome.storage.sync.get('state', ({ state }) => {
-  ReactDom.render(
-    <Provider store={configureStore(state)}>
-      <App />
-    </Provider>,
-    document.getElementById('app'),
-  );
 });

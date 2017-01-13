@@ -1,47 +1,37 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import uuid from 'uuid';
+import { branch } from 'baobab-react/higher-order';
 import util from 'util';
 import { Button, Group } from 're-bulma';
 import {
-  toggleActivation,
-  activate,
-  deactivate,
   addScript,
+  changeScriptCode,
+  changeScriptUrl,
   deleteScript,
-  saveScript
 } from '../../actions';
 import ScriptForm from '../ScriptForm';
 import UrlForm from '../UrlForm';
 import Debug from '../Debug';
 import styles from './index.css';
 
-const createNewScript = (type) => ({
-  id: uuid(),
-  type,
-  code: '',
-  url: '',
-});
-
-const App = ({ scripts, onClickAddScript, onClickAddUrl, onClickDeleteScript, onChangeScript }) => (
+const App = ({ dispatch, active, scripts }) => (
   <div>
-    <Debug />
+    <Debug active={active} scripts={scripts} />
     {scripts.map(({ id, type, code, url }) => (
       type === 'code' ? (
         <ScriptForm
           key={id}
           id={id}
           code={code}
-          onChange={code => onChangeScript({ id, code })}
-          onDelete={onClickDeleteScript}
+          onChange={code => dispatch(changeScriptCode, id, code)}
+          onDelete={() => dispatch(deleteScript, id)}
         />
       ) : (
         <UrlForm
           key={id}
           id={id}
           url={url}
-          onChange={url => onChangeScript({ id, url })}
-          onDelete={onClickDeleteScript}
+          onChange={url => dispatch(changeScriptUrl, id, url)}
+          onDelete={() => dispatch(deleteScript, id)}
         />
       )
     ))}
@@ -49,26 +39,18 @@ const App = ({ scripts, onClickAddScript, onClickAddUrl, onClickDeleteScript, on
       <Button
         className={styles.button}
         color="isPrimary"
-        onClick={onClickAddScript}
-      >Add script</Button>
+        onClick={() => dispatch(addScript, 'code')}
+      >Add code script</Button>
       <Button
         className={styles.button}
         color="isPrimary"
-        onClick={onClickAddUrl}
-      >Add url</Button>
+        onClick={() => dispatch(addScript, 'url')}
+      >Add url script</Button>
     </Group>
   </div>
 );
 
-export default connect(
-  state => ({
-    active: state.app.active,
-    scripts: state.script.scripts,
-  }),
-  dispatch => ({
-    onClickAddScript: () => dispatch(addScript(createNewScript('code'))),
-    onClickAddUrl: () => dispatch(addScript(createNewScript('url'))),
-    onClickDeleteScript: (id) => dispatch(deleteScript({ id })),
-    onChangeScript: (script) => dispatch(saveScript(script)),
-  }),
-)(App);
+export default branch({
+  active: ['active'],
+  scripts: ['scripts'],
+}, App);

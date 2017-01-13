@@ -1,29 +1,28 @@
-import { createActions } from 'redux-actions';
+import { findIndex } from 'lodash';
+import uuid from 'uuid';
 
-export const DEACTIVATE = 'DEACTIVATE';
-export const ACTIVATE = 'ACTIVATE';
-export const TOGGLE_ACTIVATION = 'TOGGLE_ACTIVATION';
+const findScriptIndex = (tree, id) => findIndex(tree.get(['scripts']), script => script.id === id);
 
-export const {
-  deactivate,
-  activate,
-  toggleActivation,
-} = createActions(
-  DEACTIVATE,
-  ACTIVATE,
-  TOGGLE_ACTIVATION,
-);
+export function addScript(tree, type) {
+  tree.push(['scripts'], {
+    id: uuid(),
+    type,
+    code: '',
+    url: '',
+  });
+}
 
-export const ADD_SCRIPT = 'ADD_SCRIPT';
-export const DELETE_SCRIPT = 'DELETE_SCRIPT';
-export const SAVE_SCRIPT = 'SAVE_SCRIPT';
+export function changeScriptCode(tree, id, code) {
+  const idx = findScriptIndex(tree, id);
+  tree.set(['scripts', idx, 'code'], code);
+}
 
-export const {
-  addScript,
-  deleteScript,
-  saveScript,
-} = createActions(
-  ADD_SCRIPT,
-  DELETE_SCRIPT,
-  SAVE_SCRIPT,
-);
+export function changeScriptUrl(tree, id, url) {
+  const idx = findScriptIndex(tree, id);
+  tree.set(['scripts', idx, 'url'], url);
+}
+
+export function deleteScript(tree, id) {
+  const idx = findScriptIndex(tree, id);
+  tree.splice(['scripts'], [idx, 1]);
+}
