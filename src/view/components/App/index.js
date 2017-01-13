@@ -11,10 +11,13 @@ import {
 import ScriptForm from '../ScriptForm';
 import UrlForm from '../UrlForm';
 import Debug from '../Debug';
+import Notify from '../Notify';
 import styles from './index.css';
 
+let ref;
 const App = ({ dispatch, active, scripts }) => (
   <div>
+    <Notify />
     <Debug active={active} scripts={scripts} />
     {scripts.map(({ id, type, code, url }) => (
       type === 'code' ? (
