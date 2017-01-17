@@ -1,7 +1,6 @@
 import React from 'react';
 import { branch } from 'baobab-react/higher-order';
 import util from 'util';
-import { Button, Group } from 're-bulma';
 import {
   addScript,
   changeScriptCode,
@@ -12,6 +11,7 @@ import ScriptForm from '../ScriptForm';
 import UrlForm from '../UrlForm';
 import Debug from '../Debug';
 import Notify from '../Notify';
+import Buttons from '../Buttons';
 import styles from './index.css';
 
 let ref;
@@ -37,18 +37,10 @@ const App = ({ dispatch, active, scripts }) => (
         />
       )
     ))}
-    <Group>
-      <Button
-        className={styles.button}
-        color="isPrimary"
-        onClick={() => dispatch(addScript, 'code')}
-      >Add code script</Button>
-      <Button
-        className={styles.button}
-        color="isPrimary"
-        onClick={() => dispatch(addScript, 'url')}
-      >Add url script</Button>
-    </Group>
+    <Buttons
+      onAddCodeScript={() => dispatch(addScript, 'code')}
+      onAddUrlScript={() => dispatch(addScript, 'url')}
+    />
   </div>
 );
 

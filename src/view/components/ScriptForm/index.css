@@ -11,3 +11,11 @@
 .box {
   border: solid 1px #00C7DA;
 }
+
+.boxOut {
+  border: solid 1px #ADB1B5;
+}
+
+.input {
+  width: 100%;
+}

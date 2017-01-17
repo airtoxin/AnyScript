@@ -1,0 +1,27 @@
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex1 {
+  flex-grow: 1;
+}
+
+.box {
+  margin: .5em;
+}
+
+.boxContainer {
+  padding: .5em;
+}
+
+.script {
+  margin: .5em .5em 1em;
+  border-radius: .5em;
+  background-color: lightblue;
+}

@@ -11,7 +11,7 @@ tree.on('update', debounce(() => {
 }, 1000));
 
 chrome.storage.sync.get('state', ({ state }) => {
-  tree.deepMerge(state);
+  if (state) tree.deepMerge(state);
 
   const Rooted = root(tree, App);
   ReactDom.render(<Rooted />, document.getElementById('app'));
