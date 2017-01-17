@@ -1,14 +1,14 @@
-const execScript = ({ type, url, code }) => {
+const execScript = ({ type, value }) => {
   switch (type) {
     case 'code': {
-      chrome.tabs.executeScript({ code });
+      chrome.tabs.executeScript({ code: value });
       break;
     }
     case 'url': {
       chrome.tabs.executeScript({ code: `
         (function() {
           const script = document.createElement('script');
-          script.src = '${url}';
+          script.src = '${value}';
           document.body.appendChild(script);
         })();`
       });
@@ -23,12 +23,15 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   });
 });
 
-chrome.runtime.onMessage.addListener(({ pageOpened }) => {
+chrome.runtime.onMessage.addListener(({ pageOpened, url }) => {
   if (!pageOpened) return;
 
   chrome.storage.sync.get('state', ({ state }) => {
     if (!state) return;
 
-    state.scripts.forEach(execScript);
+    state.scripts.forEach(script => {
+      console.log("@new RegExp(script.regexp).test(url)", new RegExp(script.regexp).test(url));
+      if (new RegExp(script.regexp).test(url)) execScript(script);
+    });
   });
 })

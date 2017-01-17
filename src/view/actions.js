@@ -8,7 +8,7 @@ export function addScript(tree, type) {
     id: uuid(),
     type,
     value: '',
-    domains: [],
+    regexp: '.*',
   });
 }
 
@@ -17,9 +17,9 @@ export function changeScript(tree, id, value) {
   tree.set(['scripts', idx, 'value'], value);
 }
 
-export function changeScriptDomains(tree, id, domains) {
+export function onChangeUrlRegExp(tree, id, regexp) {
   const idx = findScriptIndex(tree, id);
-  tree.set(['scripts', idx, 'domains'], domains);
+  tree.set(['scripts', idx, 'regexp'], regexp);
 }
 
 export function deleteScript(tree, id) {

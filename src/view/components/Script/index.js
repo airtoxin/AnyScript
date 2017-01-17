@@ -4,7 +4,7 @@ import CodeScript from './CodeScript';
 import UrlScript from './UrlScript';
 import common from '../common.css';
 
-export default ({ id, type, value, onChange, onChangeDomain, onDelete }) => {
+export default ({ id, type, value, urlRegExp, onChange, onChangeUrlRegExp, onDelete }) => {
   let ScriptComponent = null;
   if (type === 'code') ScriptComponent = CodeScript;
   if (type === 'url') ScriptComponent = UrlScript;
@@ -19,10 +19,11 @@ export default ({ id, type, value, onChange, onChangeDomain, onDelete }) => {
       <div className={common.flexRow}>
         <Input
           className={`${common.box} ${common.flex1}`}
-          placeholder="domain"
-          onChange={event => onChangeDomain(event.target.value.split(','))}
+          placeholder="url regexp"
+          value={urlRegExp}
+          onChange={event => onChangeUrlRegExp(event.target.value.split(','))}
         />
-        <Button 
+        <Button
           className={`${common.box} ${common.flex1}`}
           color="isDanger"
           onClick={onDelete}

@@ -4,7 +4,7 @@ import util from 'util';
 import {
   addScript,
   changeScript,
-  changeScriptDomains,
+  onChangeUrlRegExp,
   deleteScript,
 } from '../../actions';
 import Script from '../Script';
@@ -18,20 +18,20 @@ const App = ({ dispatch, active, scripts }) => (
   <div>
     <Notify />
     <Debug active={active} scripts={scripts} />
-    {scripts.map(({ id, type, value }) => (
+    {scripts.map(({ id, type, value, regexp }) => (
       <Script
         key={id}
         id={id}
         type={type}
         value={value}
+        urlRegExp={regexp}
         onChange={v => dispatch(changeScript, id, v)}
-        onChangeDomain={ds => dispatch(changeScriptDomains, id, ds)}
+        onChangeUrlRegExp={ds => dispatch(onChangeUrlRegExp, id, ds)}
         onDelete={() => dispatch(deleteScript, id)}
       />
     ))}
     <Buttons
       onAddCodeScript={() => dispatch(addScript, 'code')}
-      onChangeDomain={ds => dispatch(changeScriptDomains, id, ds)}
       onAddUrlScript={() => dispatch(addScript, 'url')}
     />
   </div>
