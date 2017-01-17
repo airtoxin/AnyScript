@@ -7,19 +7,19 @@ export function addScript(tree, type) {
   tree.push(['scripts'], {
     id: uuid(),
     type,
-    code: '',
-    url: '',
+    value: '',
+    domains: [],
   });
 }
 
-export function changeScriptCode(tree, id, code) {
+export function changeScript(tree, id, value) {
   const idx = findScriptIndex(tree, id);
-  tree.set(['scripts', idx, 'code'], code);
+  tree.set(['scripts', idx, 'value'], value);
 }
 
-export function changeScriptUrl(tree, id, url) {
+export function changeScriptDomains(tree, id, domains) {
   const idx = findScriptIndex(tree, id);
-  tree.set(['scripts', idx, 'url'], url);
+  tree.set(['scripts', idx, 'domains'], domains);
 }
 
 export function deleteScript(tree, id) {
