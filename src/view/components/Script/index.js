@@ -21,7 +21,7 @@ export default ({ id, type, value, urlRegExp, onChange, onChangeUrlRegExp, onDel
           className={`${common.box} ${common.flex1}`}
           placeholder="url regexp"
           value={urlRegExp}
-          onChange={event => onChangeUrlRegExp(event.target.value.split(','))}
+          onChange={event => onChangeUrlRegExp(event.target.value)}
         />
         <Button
           className={`${common.box} ${common.flex1}`}

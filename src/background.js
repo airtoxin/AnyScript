@@ -30,7 +30,6 @@ chrome.runtime.onMessage.addListener(({ pageOpened, url }) => {
     if (!state) return;
 
     state.scripts.forEach(script => {
-      console.log("@new RegExp(script.regexp).test(url)", new RegExp(script.regexp).test(url));
       if (new RegExp(script.regexp).test(url)) execScript(script);
     });
   });
