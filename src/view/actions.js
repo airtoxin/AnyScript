@@ -23,6 +23,7 @@ export function onChangeUrlRegExp(tree, id, regexp) {
 }
 
 export function deleteScript(tree, id) {
+  if (!window.confirm('Delete script?')) return;
   const idx = findScriptIndex(tree, id);
   tree.splice(['scripts'], [idx, 1]);
 }
