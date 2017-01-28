@@ -18,5 +18,8 @@
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "icons": {
+    "256": "icon256.png"
+  }
 }

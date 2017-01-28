@@ -32,6 +32,7 @@ export default {
     new Copy([
       { from: './src/manifest.json' },
       { from: './src/popup.html' },
+      { from: './src/icon256.png' },
     ]),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
