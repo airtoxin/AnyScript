@@ -1,5 +1,6 @@
 import React from 'react';
-import { Input, Button } from 're-bulma';
+import { Button } from 're-bulma';
+import Input from '../Input';
 import CodeScript from './CodeScript';
 import UrlScript from './UrlScript';
 import common from '../common.css';
@@ -21,7 +22,7 @@ export default ({ id, type, value, urlRegExp, onChange, onChangeUrlRegExp, onDel
           className={`${common.box} ${common.flex1}`}
           placeholder="url regexp"
           value={urlRegExp}
-          onChange={event => onChangeUrlRegExp(event.target.value)}
+          onChange={onChangeUrlRegExp}
         />
         <Button
           className={`${common.box} ${common.flex1}`}
