@@ -1,4 +1,6 @@
 dest/
+dest.pem
+dest.crx
 
 # Logs
 logs
