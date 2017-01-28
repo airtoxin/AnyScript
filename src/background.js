@@ -1,17 +1,21 @@
 const execScript = ({ type, value }) => {
   switch (type) {
     case 'code': {
-      chrome.tabs.executeScript({ code: value });
+      try {
+        chrome.tabs.executeScript({ code: value });
+      } catch(e) {}
       break;
     }
     case 'url': {
-      chrome.tabs.executeScript({ code: `
-        (function() {
-          const script = document.createElement('script');
-          script.src = '${value}';
-          document.body.appendChild(script);
-        })();`
-      });
+      try {
+        chrome.tabs.executeScript({ code: `
+          (function() {
+            const script = document.createElement('script');
+            script.src = '${value}';
+            document.body.appendChild(script);
+          })();`
+        });
+      } catch(e) {}
       break;
     }
   }
