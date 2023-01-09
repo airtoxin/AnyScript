@@ -39,7 +39,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "baobab": "^2.3.4",
+    "baobab": "^2.6.1",
     "baobab-react": "^2.1.2",
     "brace": "^0.9.1",
     "lodash": "^4.17.19",
